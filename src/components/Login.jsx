@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
   const navigate = useNavigate()
+  const [error, setError] = useState(false)
 
   const submit = async (event) => {
     event.preventDefault()
@@ -15,6 +17,8 @@ export const Login = () => {
     
     if (user) {
       navigate('/results')
+    } else {
+      setError(true)
     }
   }
 
@@ -22,6 +26,7 @@ export const Login = () => {
     <main className="login">
       <form onSubmit={submit}>
         <h1>Inicia sesión</h1>
+        {error ? 'Las credenciales son incorrectas':null}
         <fieldset>
           <label>
             <span>Correo</span>
